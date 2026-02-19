@@ -177,7 +177,13 @@ header .logo img {
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0) 100%), url(../img/hero-bg.png);
     background-size: cover;
     background-position: center calc(50% - 10vh);
-    animation: movement 15s ease infinite;
+}
+
+@media (max-aspect-ratio: 3/2) {
+    .home-section {
+        background-size: auto 100vh; 
+        animation: movement 15s ease infinite;
+    }
 }
 
 @keyframes movement {
@@ -694,3 +700,4 @@ footer {
         flex: 0 0 80%;
     }
 }
+
