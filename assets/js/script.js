@@ -197,6 +197,9 @@ function openModal(imgSrc) {
     if (!imgSrc) {
         return; 
     }
+    if (modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+    }
     modal.style.display = "flex";
     modalImg.src = imgSrc;
     document.body.style.overflow = "hidden";
@@ -209,7 +212,6 @@ function closeModal() {
 }
 
 /* 안내사항 */
-/* 공지사항 */
 async function fetchNotices() {
     const container = document.getElementById("notice-list-container");
 
@@ -270,8 +272,7 @@ window.addEventListener('DOMContentLoaded', fetchNotices);
 /* 모바일 슬라이더 — 섹션을 가로로 배치하고 스와이프로 이동 */
 function initMobileSlider() {
     if (!window.matchMedia('(pointer: coarse) and (max-width: 768px)').matches) return;
-
-    // contact와 footer를 하나의 래퍼로 묶기
+    
     const contact = document.getElementById('contact');
     const footer = document.querySelector('body > footer');
     if (contact && footer) {
@@ -283,14 +284,10 @@ function initMobileSlider() {
     }
 
     const slides = Array.from(document.querySelectorAll('body > section, body > #contact-footer-slide, body > footer:not(#contact-footer-slide footer)'));
-    // contact-footer-slide가 삽입된 경우 body > footer는 이미 래퍼 안으로 들어갔으므로 중복 제거
     const sections = slides.filter(el => el.tagName !== 'FOOTER');
     if (sections.length === 0) return;
 
     // 슬라이더 DOM 구조 생성
-    // #mobile-slider (고정 뷰포트 컨테이너)
-    //   └─ #mobile-track (가로 flex, transform으로 이동)
-    //        └─ 각 슬라이드 (section 또는 #contact-footer-slide)
     const allSlides = Array.from(document.querySelectorAll('body > section, body > #contact-footer-slide'));
 
     const slider = document.createElement('div');
@@ -328,15 +325,14 @@ function initMobileSlider() {
         // 도트 업데이트
         document.querySelectorAll('.slide-dot').forEach((d, i) =>
             d.classList.toggle('active', i === index));
-
-        // 전환 후 새 섹션 내부 스크롤 초기화
+        
         setTimeout(() => {
             allSlides[index].scrollTop = 0;
             isAnimating = false;
         }, 460);
     }
 
-    // 네비게이션 링크 → goToSlide 로 오버라이드
+    // 네비게이션 링크 → goToSlide로 오버라이드
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', (e) => {
             const id = link.getAttribute('href').substring(1);
@@ -372,3 +368,4 @@ function initMobileSlider() {
         goToSlide(dx < 0 ? current + 1 : current - 1);
     }, { passive: true });
 }
+
