@@ -714,10 +714,9 @@ footer {
     }
 }
 
-/* 모바일 슬라이더 */
+/* Mobile Slider */
 @media (pointer: coarse) and (max-width: 768px) {
 
-    /* 슬라이더 외부 컨테이너 — 뷰포트 전체를 고정으로 덮음 */
     #mobile-slider {
         position: fixed;
         top: 0;
@@ -728,7 +727,6 @@ footer {
         z-index: 1;
     }
 
-    /* 가로 flex 트랙 — transform으로 슬라이드 이동 */
     #mobile-track {
         display: flex;
         flex-direction: row;
@@ -737,7 +735,6 @@ footer {
         will-change: transform;
     }
 
-    /* 각 슬라이드(섹션) */
     #mobile-track > section,
     #mobile-track > footer,
     #mobile-track > #contact-footer-slide {
@@ -753,8 +750,7 @@ footer {
     #mobile-track .container {
         margin-top: 20px;
     }
-
-    /* contact-footer 래퍼는 내부에서 세로로 쌓임 */
+    
     #contact-footer-slide {
         display: flex;
         flex-direction: column;
@@ -765,12 +761,10 @@ footer {
         padding-top: 0;
     }
 
-    /* greeting 섹션 — transform 컨테이너 안에서 fixed 배경이 안 되므로 scroll로 변경 */
     #greeting {
         background-attachment: scroll !important;
     }
 
-    /* 도트 인디케이터 */
     #slide-dots {
         position: fixed;
         bottom: 18px;
@@ -795,3 +789,4 @@ footer {
         transform: scale(1.4);
     }
 }
+
