@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeroParallax();
     initScrollReveal();
     initDetailsAnimation();
+    initMobileSlider();
 });
 
 /* 타이핑 애니메이션 */
@@ -265,3 +266,109 @@ async function fetchNotices() {
 
 // 페이지 로드 시 실행
 window.addEventListener('DOMContentLoaded', fetchNotices);
+
+/* 모바일 슬라이더 — 섹션을 가로로 배치하고 스와이프로 이동 */
+function initMobileSlider() {
+    if (!window.matchMedia('(pointer: coarse) and (max-width: 768px)').matches) return;
+
+    // contact와 footer를 하나의 래퍼로 묶기
+    const contact = document.getElementById('contact');
+    const footer = document.querySelector('body > footer');
+    if (contact && footer) {
+        const wrapper = document.createElement('div');
+        wrapper.id = 'contact-footer-slide';
+        contact.parentNode.insertBefore(wrapper, contact);
+        wrapper.appendChild(contact);
+        wrapper.appendChild(footer);
+    }
+
+    const slides = Array.from(document.querySelectorAll('body > section, body > #contact-footer-slide, body > footer:not(#contact-footer-slide footer)'));
+    // contact-footer-slide가 삽입된 경우 body > footer는 이미 래퍼 안으로 들어갔으므로 중복 제거
+    const sections = slides.filter(el => el.tagName !== 'FOOTER');
+    if (sections.length === 0) return;
+
+    // 슬라이더 DOM 구조 생성
+    // #mobile-slider (고정 뷰포트 컨테이너)
+    //   └─ #mobile-track (가로 flex, transform으로 이동)
+    //        └─ 각 슬라이드 (section 또는 #contact-footer-slide)
+    const allSlides = Array.from(document.querySelectorAll('body > section, body > #contact-footer-slide'));
+
+    const slider = document.createElement('div');
+    slider.id = 'mobile-slider';
+
+    const track = document.createElement('div');
+    track.id = 'mobile-track';
+    slider.appendChild(track);
+
+    allSlides[0].parentNode.insertBefore(slider, allSlides[0]);
+    allSlides.forEach(sec => track.appendChild(sec));
+
+    // 도트 인디케이터 생성
+    const dotsEl = document.createElement('div');
+    dotsEl.id = 'slide-dots';
+    allSlides.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsEl.appendChild(dot);
+    });
+    document.body.appendChild(dotsEl);
+
+    let current = 0;
+    let isAnimating = false;
+
+    function goToSlide(index) {
+        if (index < 0 || index >= allSlides.length || isAnimating) return;
+        isAnimating = true;
+        current = index;
+
+        // 가로 이동
+        track.style.transform = `translateX(calc(${-index} * 100vw))`;
+
+        // 도트 업데이트
+        document.querySelectorAll('.slide-dot').forEach((d, i) =>
+            d.classList.toggle('active', i === index));
+
+        // 전환 후 새 섹션 내부 스크롤 초기화
+        setTimeout(() => {
+            allSlides[index].scrollTop = 0;
+            isAnimating = false;
+        }, 460);
+    }
+
+    // 네비게이션 링크 → goToSlide 로 오버라이드
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const id = link.getAttribute('href').substring(1);
+            if (!id) return;
+            const idx = allSlides.findIndex(s => s.id === id || s.querySelector('#' + id));
+            if (idx !== -1) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                goToSlide(idx);
+            }
+        });
+    });
+
+    // 터치 스와이프 처리
+    let startX = 0, startY = 0, isHorizontal = false;
+
+    track.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        isHorizontal = false;
+    }, { passive: true });
+
+    track.addEventListener('touchmove', e => {
+        const dx = Math.abs(e.touches[0].clientX - startX);
+        const dy = Math.abs(e.touches[0].clientY - startY);
+        if (!isHorizontal && dx > dy && dx > 8) isHorizontal = true;
+    }, { passive: true });
+
+    track.addEventListener('touchend', e => {
+        if (!isHorizontal) return;
+        const dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) < 50) return;
+        goToSlide(dx < 0 ? current + 1 : current - 1);
+    }, { passive: true });
+}
