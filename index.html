@@ -21,11 +21,11 @@
         </div>
 
         <nav class="pc-nav">
-            <a href="#links">Links</a>
-            <a href="#rules">Rules</a>
-            <a href="#complaint">Complaint</a>
             <a href="#notice">Notice</a>
             <a href="#gallery">Gallery</a>
+            <a href="#links">Links</a>
+            <a href="#complaint">Complaint</a>
+            <a href="#rules">Rules</a>
             <a href="#members">Members</a>
             <a href="#greeting">Greeting</a>
             <a href="#contact">Contact</a>
@@ -37,11 +37,11 @@
     </header>
 
     <nav class="dropdown-menu" id="dropdownMenu">
-        <a href="#links">Links</a>
-        <a href="#rules">Rules</a>
-        <a href="#complaint">Complaint</a>
         <a href="#notice">Notice</a>
         <a href="#gallery">Gallery</a>
+        <a href="#links">Links</a>
+        <a href="#complaint">Complaint</a>
+        <a href="#rules">Rules</a>
         <a href="#members">Members</a>
         <a href="#greeting">Greeting</a>
         <a href="#contact">Contact</a>
@@ -64,9 +64,73 @@
         </div>
     </section>
 
-    <!-- Links -->
-    <section id="links"
+    <!-- Notice -->
+    <section id="notice"
         style="background-image: linear-gradient(to top, rgba(245, 247, 250, 0.75) 0%, rgba(245, 247, 250, 0) 75%);">
+        <div class="container fade-in-box">
+            <h2 class="section-title">사나래 안내 사항</h2>
+            <div id="notice-list-container">
+                <p style="text-align: center; padding: 20px;">공지사항을 불러오는 중입니다...</p>
+            </div>
+        </div>
+    </section>
+
+    <!--Gallery-->
+    <section id="gallery" style="background-color: rgba(245, 247, 250, 0.75);">
+        <div class="container fade-in-box">
+            <h2 class="section-title">사나래 갤러리</h2>
+
+            <div class="card-container">
+
+                <div class="card" onclick="openModal('https://picsum.photos/800/600?random=11')">
+                    <img src="https://picsum.photos/300/200?random=11">
+                    <div class="card-content">
+                        <div class="card-title">카드 제목 1</div>
+                        <div class="card-text">내용 작성.</div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openModal('https://picsum.photos/800/600?random=12')">
+                    <img src="https://picsum.photos/300/200?random=12">
+                    <div class="card-content">
+                        <div class="card-title">카드 제목 2</div>
+                        <div class="card-text">내용 작성.</div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openModal('https://picsum.photos/800/600?random=13')">
+                    <img src="https://picsum.photos/300/200?random=13">
+                    <div class="card-content">
+                        <div class="card-title">카드 제목 3</div>
+                        <div class="card-text">내용 작성.</div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openModal('https://picsum.photos/800/600?random=14')">
+                    <img src="https://picsum.photos/300/200?random=14">
+                    <div class="card-content">
+                        <div class="card-title">카드 제목 4</div>
+                        <div class="card-text">내용 작성.</div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openModal('https://picsum.photos/800/600?random=15')">
+                    <img src="https://picsum.photos/300/200?random=15">
+                    <div class="card-content">
+                        <div class="card-title">카드 제목 5</div>
+                        <div class="card-text">내용 작성.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="imageModal" class="modal" onclick="closeModal()">
+            <img id="modalImg">
+            <div class="close-text">아무 곳이나 클릭하여 닫기</div>
+        </div>
+    </section>
+
+    <!-- Links -->
+    <section id="links" style="background-color: rgba(245, 247, 250, 0.75);">
         <div class="container fade-in-box">
             <h2 class="section-title">SASA 링크 모음</h2>
 
@@ -160,6 +224,22 @@
         </div>
     </section>
 
+    <!-- Complaint -->
+    <section id="complaint" style="background-color: rgba(245, 247, 250, 0.75);">
+        <div class="container fade-in-box">
+            <h2 class="section-title">사사신문고</h2>
+
+            <div class="petition-wrapper">
+                <div class="info-content">
+                    <p><strong>접수기간:</strong> 2026.XX.XX ~ 2026.XX.XX</p>
+                    <p><strong>처리기간:</strong> 2026.XX.XX ~ 2026.XX.XX</p>
+                </div>
+                <a href="https://sasa-hs.github.io/sinmungo/" class="large-btn">→ 신문고 접수하기</a>
+            </div>
+
+        </div>
+    </section>
+
     <!-- Rules -->
     <section id="rules" style="background-color: rgba(245, 247, 250, 0.75);">
         <div class="container fade-in-box">
@@ -184,86 +264,6 @@
 " download><span class="ico-circle"><i class="bi bi-download"></i></span></a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Complaint -->
-    <section id="complaint" style="background-color: rgba(245, 247, 250, 0.75);">
-        <div class="container fade-in-box">
-            <h2 class="section-title">사사신문고</h2>
-
-            <div class="petition-wrapper">
-                <div class="info-content">
-                    <p><strong>접수기간:</strong> 2026.XX.XX ~ 2026.XX.XX</p>
-                    <p><strong>처리기간:</strong> 2026.XX.XX ~ 2026.XX.XX</p>
-                </div>
-                <a href="https://sasa-hs.github.io/sinmungo/" class="large-btn">→ 신문고 접수하기</a>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Notice -->
-    <section id="notice" style="background-color: rgba(245, 247, 250, 0.75);">
-        <div class="container fade-in-box">
-            <h2 class="section-title">사나래 안내 사항</h2>
-            <div id="notice-list-container">
-                <p style="text-align: center; padding: 20px;">공지사항을 불러오는 중입니다...</p>
-            </div>
-        </div>
-    </section>
-
-    <!--Gallery-->
-    <section id="gallery" style="background-color: rgba(245, 247, 250, 0.75);">
-        <div class="container fade-in-box">
-            <h2 class="section-title">사나래 갤러리</h2>
-
-            <div class="card-container">
-
-                <div class="card" onclick="openModal('https://picsum.photos/800/600?random=11')">
-                    <img src="https://picsum.photos/300/200?random=11">
-                    <div class="card-content">
-                        <div class="card-title">카드 제목 1</div>
-                        <div class="card-text">내용 작성.</div>
-                    </div>
-                </div>
-
-                <div class="card" onclick="openModal('https://picsum.photos/800/600?random=12')">
-                    <img src="https://picsum.photos/300/200?random=12">
-                    <div class="card-content">
-                        <div class="card-title">카드 제목 2</div>
-                        <div class="card-text">내용 작성.</div>
-                    </div>
-                </div>
-
-                <div class="card" onclick="openModal('https://picsum.photos/800/600?random=13')">
-                    <img src="https://picsum.photos/300/200?random=13">
-                    <div class="card-content">
-                        <div class="card-title">카드 제목 3</div>
-                        <div class="card-text">내용 작성.</div>
-                    </div>
-                </div>
-
-                <div class="card" onclick="openModal('https://picsum.photos/800/600?random=14')">
-                    <img src="https://picsum.photos/300/200?random=14">
-                    <div class="card-content">
-                        <div class="card-title">카드 제목 4</div>
-                        <div class="card-text">내용 작성.</div>
-                    </div>
-                </div>
-
-                <div class="card" onclick="openModal('https://picsum.photos/800/600?random=15')">
-                    <img src="https://picsum.photos/300/200?random=15">
-                    <div class="card-content">
-                        <div class="card-title">카드 제목 5</div>
-                        <div class="card-text">내용 작성.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="imageModal" class="modal" onclick="closeModal()">
-            <img id="modalImg">
-            <div class="close-text">아무 곳이나 클릭하여 닫기</div>
         </div>
     </section>
 
@@ -381,6 +381,3 @@
 </body>
 
 </html>
-
-
-
