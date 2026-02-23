@@ -695,25 +695,6 @@ footer {
     }
 }
 
-@media (max-width: 768px) {
-    .card {
-        flex: 0 0 80%;
-    }
-
-    .card-container {
-        flex-direction: column;
-        overflow-x: visible;
-        overflow-y: visible;
-        scroll-snap-type: none;
-    }
-
-    .card {
-        flex: 0 0 auto;
-        width: 100%;
-        min-width: unset;
-    }
-}
-
 /* Mobile Slider */
 @media (pointer: coarse) and (max-width: 768px) {
 
@@ -788,6 +769,20 @@ footer {
         background: var(--second);
         transform: scale(1.4);
     }
+    
+    .card-container {
+        flex-direction: column;
+        overflow-x: visible;
+        overflow-y: visible;
+        scroll-snap-type: none;
+    }
+
+    .card {
+        flex: 0 0 auto;
+        width: 100%;
+        min-width: unset;
+    }
 }
+
 
 
