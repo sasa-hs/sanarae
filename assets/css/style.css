@@ -695,7 +695,7 @@ footer {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .card {
         flex: 0 0 80%;
     }
@@ -789,4 +789,5 @@ footer {
         transform: scale(1.4);
     }
 }
+
 
